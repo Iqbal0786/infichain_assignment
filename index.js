@@ -28,11 +28,8 @@ socket.onmessage= function(ws){
 // console.log(payload)
 try {
     
-    let {side , price , type ,time , product_ids}= JSON.parse(ws.data);
+    let {side , price , type }= JSON.parse(ws.data);
     console.log(JSON.parse(ws.data))
-  if(product_ids=="LTC-USD"){
-      console.log(JSON.parse(ws.data))
-  }
      if(side=="sell" && type=="received"){
          sell.push(+price)
 
