@@ -1,31 +1,38 @@
-let coin;
+let value="";
+let socket;
+let payload={
+    type: "subscribe",
+    product_ids: ["BTC-USD"],
+    channels: ["full"]
+    
+     }
 function getValue(){
-coin=document.getElementById("prod").value
+ let coin=document.getElementById("prod").value
+    let value={...payload}
+    value.product_ids[0]=coin
+    makereq(value)
 }
 
-// creating socket object
-let socket= new WebSocket("wss://ws-feed.pro.coinbase.com");
-// sending data to server when connection is alive
-socket.onopen=function(event){
- console.log("connected " , event)
- let payload={
-type: "subscribe",
-product_ids: ["BTC-USD"],
-channels: ["full"]
-
+ makereq(payload)
+ 
+ function makereq(data){
+     // creating socket object
+ socket= new WebSocket("wss://ws-feed.pro.coinbase.com");
+ // sending data to server when connection is alive
+ socket.onopen=function(event){
+  console.log("connected " , event)
+ socket.send(JSON.stringify(data))
+ 
  }
-//  payload.product_ids[0]=coin
-socket.send(JSON.stringify(payload))
+ }
 
-}
 
-// tow array for storing price of sell and price
+// two array for storing price of sell and price
 let sell=[]
 let buy=[]
 
 
 socket.onmessage= function(ws){
-// console.log(payload)
 try {
     
     let {side , price , type }= JSON.parse(ws.data);
@@ -75,7 +82,6 @@ function show(sell, buy){
  datetime.setMilliseconds(0)
  // removing miliseconds from the date 
  let now = datetime.toISOString().replace('.000Z', ' ').replace('T', ' ')
- console.log(now)
  document.getElementById("time").textContent="Time : "+now
  // making sell and price array empty at every 5 seconds to store new value
  sell.length=0
