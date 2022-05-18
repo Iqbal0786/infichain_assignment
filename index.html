@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coinbase Data Tracker</title>
+    <style>
+        h1{
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+        }
+        .parent{
+            margin: auto;
+            width: 300px;
+            display: flex;
+            justify-content: space-between;
+
+        }
+        .parent > label{
+            font-family: monospace;
+            font-size: 19px;
+        }
+        #displayDiv{
+            width: 60%;
+            height: 250px;
+            margin: auto;
+            margin-top: 20px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            padding: 20px;
+            
+        }
+        #displayDiv>p{
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Coinbase Crypto Tracker</h1>
+    <div class="parent">
+      <label for="">Select Product_Ids</label> <select id="prod" onchange="getValue()">
+           <option value="BTC-USD"> BTC-USD</option>
+           <option value="LTC-USD">LTC-USD</option>
+       </select>
+    </div>
+
+      <div id="displayDiv">
+          <p id="time"></p>
+          <p id="buy"></p>
+           <p id="sell"></p>
+          
+      </div>
+</body>
+</html>
+<script src="./index.js"></script>
